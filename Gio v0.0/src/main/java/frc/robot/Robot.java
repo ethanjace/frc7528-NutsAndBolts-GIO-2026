@@ -6,9 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+
+import frc.robot.RobotContainer;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -19,10 +24,18 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  * build.gradle file in the
  * project.
  */
+
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+    // CONTROLLER
+private final XboxController xbox = new XboxController(1);
+
+
+// PNEUMATICS test
+private final Compressor comp = new Compressor(null);
+private final DoubleSolenoid solenoid = new DoubleSolenoid(null,0, 1);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -104,6 +117,15 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
+
+
+    // temp code (for PNEUMATIC test)
+    if (xbox.getLeftBumperButtonPressed()) {
+      solenoid.set(DoubleSolenoid.Value.kForward);
+    } else if (xbox.getRightBumperButtonPressed()) {
+      solenoid.set(DoubleSolenoid.Value.kReverse);
+    }
+
   }
 
   @Override
