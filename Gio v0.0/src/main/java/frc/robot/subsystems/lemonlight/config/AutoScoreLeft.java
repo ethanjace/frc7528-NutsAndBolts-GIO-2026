@@ -1,6 +1,6 @@
 package frc.robot.subsystems.lemonlight.config;
 
-public class AutoScoreLeftconfig {
+public class AutoScoreLeft {
 
     //Configurations for DISTANCE component of left auto-positioning at the Reef
     public static class DistancePID{
@@ -40,3 +40,4 @@ public class AutoScoreLeftconfig {
     public static double AngleTolerance = 2;
 
 }
+

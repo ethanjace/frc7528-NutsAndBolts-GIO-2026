@@ -5,10 +5,10 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.RobotContainer;
-// import frc.robot.RobotContainer;
-import frc.robot.subsystems.lemonlight.config.AutoScoreRightConfig;
+import frc.robot.subsystems.lemonlight.config.AutoScoreRight;
 
-public class rightdashboard {
+
+public class RightDashboard {
     
 
     private static DoubleEntry StrafeToleranceEntry;
@@ -25,25 +25,25 @@ public class rightdashboard {
 
         //STRAFE CONFIG
         SmartDashboard.putData("AutoScoreRight Strafe PID",RobotContainer.limelight.strafeController);
-        StrafeToleranceEntry = addEntryWithValue("Strafe Tolerance", AutoScoreRightConfig.StrafeTolerance);
+        StrafeToleranceEntry = addEntryWithValue("Strafe Tolerance", AutoScoreRight.StrafeTolerance);
 
         //ANGLE CONFIG
         SmartDashboard.putData("AutoScoreRight Angle PID", RobotContainer.limelight.angleController);
-        AngleTargetEntry = addEntryWithValue("Angle Target",AutoScoreRightConfig.AngleTarget);
-        AngleToleranceEntry = addEntryWithValue("Angle Tolerance", AutoScoreRightConfig.AngleTolerance);
+        AngleTargetEntry = addEntryWithValue("Angle Target",AutoScoreRight.AngleTarget);
+        AngleToleranceEntry = addEntryWithValue("Angle Tolerance", AutoScoreRight.AngleTolerance);
 
         //DISTANCE CONFIG
         SmartDashboard.putData("AutoScoreRight Distance PID",RobotContainer.limelight.distanceController);
-        DistanceTargetEntry = addEntryWithValue("Distance Target", AutoScoreRightConfig.DistanceTarget);
-        DistanceToleranceEntry = addEntryWithValue("Distance Tolerance", AutoScoreRightConfig.DistanceTolerance);
+        DistanceTargetEntry = addEntryWithValue("Distance Target", AutoScoreRight.DistanceTarget);
+        DistanceToleranceEntry = addEntryWithValue("Distance Tolerance", AutoScoreRight.DistanceTolerance);
      }
 
     public static void syncDashboard() {
-        AutoScoreRightConfig.StrafeTolerance = StrafeToleranceEntry.get(AutoScoreRightConfig.StrafeTolerance);
-        AutoScoreRightConfig.AngleTarget = AngleTargetEntry.get(AutoScoreRightConfig.AngleTarget);
-        AutoScoreRightConfig.AngleTolerance = AngleToleranceEntry.get(AutoScoreRightConfig.AngleTolerance);
-        AutoScoreRightConfig.DistanceTarget = DistanceTargetEntry.get(AutoScoreRightConfig.DistanceTarget);
-        AutoScoreRightConfig.DistanceTolerance = DistanceToleranceEntry.get(AutoScoreRightConfig.DistanceTolerance);
+        AutoScoreRight.StrafeTolerance = StrafeToleranceEntry.get(AutoScoreRight.StrafeTolerance);
+        AutoScoreRight.AngleTarget = AngleTargetEntry.get(AutoScoreRight.AngleTarget);
+        AutoScoreRight.AngleTolerance = AngleToleranceEntry.get(AutoScoreRight.AngleTolerance);
+        AutoScoreRight.DistanceTarget = DistanceTargetEntry.get(AutoScoreRight.DistanceTarget);
+        AutoScoreRight.DistanceTolerance = DistanceToleranceEntry.get(AutoScoreRight.DistanceTolerance);
         return;
 
     }
