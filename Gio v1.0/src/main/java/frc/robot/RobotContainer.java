@@ -4,19 +4,34 @@
 
 package frc.robot;
 
+
+import static edu.wpi.first.units.Units.*;
+
+import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
+
 import static frc.robot.Constants.OperatorConstants.*;
-import frc.robot.commands.Drive;
+
+
+import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
+import com.ctre.phoenix6.swerve.SwerveRequest;
+
+
 import frc.robot.commands.Eject;
-import frc.robot.commands.ExampleAuto;
+// import frc.robot.commands.ExampleAuto;
 import frc.robot.commands.Intake;
 import frc.robot.commands.LaunchSequence;
-import frc.robot.subsystems.CANDriveSubsystem;
+// import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.lemonlight.lemonlightuno;
+import frc.robot.generated.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -28,19 +43,33 @@ import frc.robot.subsystems.lemonlight.lemonlightuno;
 public class RobotContainer {
 
 
+    private double MaxSpeed = TunerConstantsGio.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
   // SUBSYSTEMS   ---   ---   ---   ---   ---
-  private final CANDriveSubsystem driveSubsystem = new CANDriveSubsystem();
   private final CANFuelSubsystem fuelSubsystem = new CANFuelSubsystem();
   public static lemonlightuno limelight = new lemonlightuno();
+  public final CommandSwerveDrivetrain drivetrain = TunerConstantsGio.createDrivetrain();
 
   // DRIVER   ---   ---   ---   ---   ---
-  private final CommandXboxController driverController = new CommandXboxController(DRIVER_CONTROLLER_PORT);
+  private final CommandXboxController driverController = new CommandXboxController(0);
+  private final Telemetry logger = new Telemetry(MaxSpeed);
+  private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
+            .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
+            .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+  
+  private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
+  private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
+
+    
+    
 
   // OPERATOR    ---   ---   ---   ---   ---
-  private final CommandXboxController operatorController = new CommandXboxController(OPERATOR_CONTROLLER_PORT);
+  private final CommandXboxController operatorController = new CommandXboxController(1);
 
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+
+  
 
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
@@ -65,10 +94,21 @@ public class RobotContainer {
    * {@link edu.wpi.first.wpilibj2.command.button.CommandJoystick Flight
    * joysticks}.
    */
-  private void configureBindings() {
+  private void configureBindings() { 
+   
 
+    driverController.leftBumper().whileTrue(drivetrain.applyRequest(() -> brake));
+    drivetrain.setDefaultCommand(
+            // Drivetrain will execute this command periodically
+            drivetrain.applyRequest(() ->
+                drive.withVelocityX(driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                    .withVelocityY(-driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)
+                    .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+            )
+        );
+    // OPERATOR
     // While the left bumper on operator controller is held, intake Fuel
-    operatorController.leftBumper().whileTrue(new Intake(fuelSubsystem));
+    driverController.rightBumper().whileTrue(new Intake(fuelSubsystem));
     // While the right bumper on the operator controller is held, spin up for 1
     // second, then launch fuel. When the button is released, stop.
     operatorController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
@@ -81,7 +121,6 @@ public class RobotContainer {
     // controller. The Y axis of the controller is inverted so that pushing the
     // stick away from you (a negative value) drives the robot forwards (a positive
     // value)
-    driveSubsystem.setDefaultCommand(new Drive(driveSubsystem, driverController));
 
     fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
   }

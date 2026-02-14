@@ -29,9 +29,9 @@ public class Robot extends TimedRobot {
 
   private RobotContainer m_robotContainer;
 
-  // PNEUMATICS [test]
-  private final XboxController xbox = new XboxController(0);
-  private final DoubleSolenoid solenoid = new DoubleSolenoid(14, PneumaticsModuleType.CTREPCM, 0, 1);
+  // // PNEUMATICS [test]
+  // private final XboxController xbox = new XboxController(0);
+  // private final DoubleSolenoid solenoid = new DoubleSolenoid(14, PneumaticsModuleType.CTREPCM, 0, 1);
 
   /**
    * This function is run when the robot is first started up and should be used
@@ -108,7 +108,7 @@ public class Robot extends TimedRobot {
       m_autonomousCommand.cancel();
     }
     
-    solenoid.set(DoubleSolenoid.Value.kReverse);
+    // solenoid.set(DoubleSolenoid.Value.kReverse);
 
   }
 
@@ -116,12 +116,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
-    if (xbox.getRightBumperButtonPressed()) {
+  //   if (xbox.getRightBumperButtonPressed()) {
       
-      solenoid.toggle();
-    }
+  //     solenoid.toggle();
+  //   }
     
-    System.out.println(solenoid.get());
+  //   System.out.println(solenoid.get());
   }
 
   @Override
