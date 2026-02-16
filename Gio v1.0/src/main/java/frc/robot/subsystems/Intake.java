@@ -31,7 +31,7 @@ public class Intake extends SubsystemBase {
   }
   
   public void RotateIntake(double speed) {
-    intakeR.set(speed);
+  intakeR.set(speed);
   }
 
   @Override
