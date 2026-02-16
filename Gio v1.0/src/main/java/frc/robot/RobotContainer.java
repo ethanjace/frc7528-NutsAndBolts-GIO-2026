@@ -23,9 +23,11 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 
 
-import frc.robot.commands.Eject;
+import frc.robot.commands.IntakeUp;
+import frc.robot.commands.IntakeDown;
+import frc.robot.commands.IntakeGo;
 // import frc.robot.commands.ExampleAuto;
-import frc.robot.commands.Intake;
+import frc.robot.subsystems.Intake;
 import frc.robot.commands.LaunchSequence;
 // import frc.robot.subsystems.CANDriveSubsystem;
 import frc.robot.subsystems.CANFuelSubsystem;
@@ -48,7 +50,8 @@ public class RobotContainer {
   // SUBSYSTEMS   ---   ---   ---   ---   ---
   private final CANFuelSubsystem fuelSubsystem = new CANFuelSubsystem();
   public static lemonlightuno limelight = new lemonlightuno();
-  public final CommandSwerveDrivetrain drivetrain = TunerConstantsGio.createDrivetrain();
+  private final CommandSwerveDrivetrain drivetrain = TunerConstantsGio.createDrivetrain();
+  private final Intake intake = new Intake();
 
   // DRIVER   ---   ---   ---   ---   ---
   private final CommandXboxController driverController = new CommandXboxController(0);
@@ -106,15 +109,11 @@ public class RobotContainer {
                     .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
             )
         );
-    // OPERATOR
-    // While the left bumper on operator controller is held, intake Fuel
-    driverController.rightBumper().whileTrue(new Intake(fuelSubsystem));
-    // While the right bumper on the operator controller is held, spin up for 1
-    // second, then launch fuel. When the button is released, stop.
-    operatorController.rightBumper().whileTrue(new LaunchSequence(fuelSubsystem));
-    // While the A button is held on the operator controller, eject fuel back out
-    // the intake
-    operatorController.a().whileTrue(new Eject(fuelSubsystem));
+    // INTAKE MECHANISM
+    driverController.x().whileTrue(new IntakeGo(intake));
+    driverController.a().whileTrue(new IntakeUp(intake));
+    driverController.b().whileTrue(new IntakeDown(intake));
+    
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver

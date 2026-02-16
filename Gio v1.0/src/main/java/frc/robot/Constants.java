@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import com.ctre.phoenix6.configs.CurrentLimitsConfigs;
+import com.ctre.phoenix6.configs.TalonFXConfiguration;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide
  * numerical or boolean constants. This class should not be used for any other
@@ -57,5 +60,15 @@ public final class Constants {
     // help avoid turning too fast and beign difficult to control
     public static final double DRIVE_SCALING = .7;
     public static final double ROTATION_SCALING = .8;
+  }
+
+  public static final class IntakeConstants {
+    public static final int INTAKE_ROTATE_MOTOR_ID = 15;
+    public static final int INTAKE_SPIN_MOTOR_ID = 14;
+    public static final TalonFXConfiguration configs = new TalonFXConfiguration();
+    public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs()
+    .withStatorCurrentLimit(60)
+    .withStatorCurrentLimitEnable(true)
+    .withSupplyCurrentLimitEnable(true);
   }
 }
