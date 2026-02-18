@@ -5,17 +5,15 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Outtake;
 
-public class IntakeGo extends Command {
-  /** Creates a new IntakeGo. */
-
-  //DECLARE
-  private Intake intake;
-
-  public IntakeGo(Intake intake) {
-    this.intake  = intake;
-    addRequirements(this.intake);
+/* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
+public class ballsGo extends Command {
+  
+  private Outtake outtake = new Outtake();
+  public ballsGo(Outtake outtake) {
+    this.outtake = outtake;
+    addRequirements(this.outtake);
   }
 
   // Called when the command is initially scheduled.
@@ -25,14 +23,13 @@ public class IntakeGo extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Intakes
-    intake.TakeIn(-0.5);
+    outtake.takeOutTheTrash(0.5);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    intake.TakeIn(0);
+    outtake.takeOutTheTrash(0);
   }
 
   // Returns true when the command should end.

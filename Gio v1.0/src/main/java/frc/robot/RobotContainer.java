@@ -24,13 +24,12 @@ import com.ctre.phoenix6.swerve.SwerveRequest;
 
 
 import frc.robot.commands.IntakeUp;
+import frc.robot.commands.ballsGo;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
 // import frc.robot.commands.ExampleAuto;
 import frc.robot.subsystems.Intake;
-import frc.robot.commands.LaunchSequence;
-// import frc.robot.subsystems.CANDriveSubsystem;
-import frc.robot.subsystems.CANFuelSubsystem;
+import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.lemonlight.lemonlightuno;
 import frc.robot.generated.*;
@@ -48,10 +47,10 @@ public class RobotContainer {
     private double MaxSpeed = TunerConstantsGio.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
     private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
   // SUBSYSTEMS   ---   ---   ---   ---   ---
-  private final CANFuelSubsystem fuelSubsystem = new CANFuelSubsystem();
   public static lemonlightuno limelight = new lemonlightuno();
   private final CommandSwerveDrivetrain drivetrain = TunerConstantsGio.createDrivetrain();
   private final Intake intake = new Intake();
+  private final Outtake outtake = new Outtake();
 
   // DRIVER   ---   ---   ---   ---   ---
   private final CommandXboxController driverController = new CommandXboxController(0);
@@ -104,9 +103,10 @@ public class RobotContainer {
     drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                drive.withVelocityX(-driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
                     .withVelocityY(-driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)
                     .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
+                    .withRotationalRate(driverController.getRightY() * MaxAngularRate) // Drive clockwise with positive X (right)
             )
         );
     // INTAKE MECHANISM
@@ -114,6 +114,8 @@ public class RobotContainer {
     driverController.a().whileTrue(new IntakeUp(intake));
     driverController.b().whileTrue(new IntakeDown(intake));
     
+    // OUTTAKE MECHANISM
+    driverController.y().whileTrue(new ballsGo(outtake));
 
     // Set the default command for the drive subsystem to the command provided by
     // factory with the values provided by the joystick axes on the driver
@@ -121,7 +123,7 @@ public class RobotContainer {
     // stick away from you (a negative value) drives the robot forwards (a positive
     // value)
 
-    fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
+    // fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
   }
 
   /**
