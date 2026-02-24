@@ -27,7 +27,7 @@ import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ballsGo;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
-// import frc.robot.commands.ExampleAuto;
+//import frc.robot.commands.ExampleAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
@@ -70,6 +70,9 @@ public class RobotContainer {
 
   // The autonomous chooser
   private final SendableChooser<Command> autoChooser = new SendableChooser<>();
+  private static final String kDefaultAuto = "auto1"; // NEW AUTO
+    private static final String kCustomAuto = "auto1"; //ADDED
+    private String m_autoSelected; //ADDED
 
   
 
@@ -100,15 +103,16 @@ public class RobotContainer {
    
 
     driverController.leftBumper().whileTrue(drivetrain.applyRequest(() -> brake));
+    
     drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
                 drive.withVelocityX(-driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(-driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)
-                    .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Drive counterclockwise with negative X (left)
-                    .withRotationalRate(driverController.getRightY() * MaxAngularRate) // Drive clockwise with positive X (right)
+                    .withVelocityY(driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)  
+                     .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Rotate clockwise with positive X (right)
             )
         );
+    
     // INTAKE MECHANISM
     driverController.x().whileTrue(new IntakeGo(intake));
     driverController.a().whileTrue(new IntakeUp(intake));
@@ -131,6 +135,7 @@ public class RobotContainer {
    *
    * @return the command to run in autonomous
    */
+  
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
     return autoChooser.getSelected();

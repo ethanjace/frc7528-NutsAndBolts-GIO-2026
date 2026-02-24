@@ -4,12 +4,16 @@
 
 package frc.robot;
 
+import java.nio.channels.SelectableChannel;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -38,6 +42,7 @@ public class Robot extends TimedRobot {
    * for any
    * initialization code.
    */
+  
   @Override
   public void robotInit() {
     // Instantiate our RobotContainer. This will perform all our button bindings,
@@ -59,7 +64,8 @@ public class Robot extends TimedRobot {
    * and
    * SmartDashboard integrated updating.
    */
-  @Override
+  
+   @Override
   public void robotPeriodic() {
     // Runs the Scheduler. This is responsible for polling buttons, adding
     // newly-scheduled
@@ -84,9 +90,24 @@ public class Robot extends TimedRobot {
    * This autonomous runs the autonomous command selected by your
    * {@link RobotContainer} class.
    */
-  @Override
+   
+   //AUTONOMOUS
+   private static final String kDefaultAuto = "auto"; // NEW AUTO
+    private static final String kCustomAuto = "auto1";
+    private String m_autoSelected;
+    private final SendableChooser<String> m_chooser = new SendableChooser<>();
+   
+   public Robot() {
+    m_chooser.setDefaultOption("auto1", kDefaultAuto);
+    m_chooser.addOption("auto1", kCustomAuto);
+    SmartDashboard.putData("auto1",m_chooser);
+   }
+  
+   @Override
   public void autonomousInit() {
-    m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    m_autoSelected = m_chooser.getSelected();
+    // Original line for line 108: m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    System.out.println("Auto selected: "+ "auto1");
 
     // schedule the autonomous command
     if (m_autonomousCommand != null)
@@ -96,6 +117,16 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
+    switch(m_autoSelected){
+      case kCustomAuto:
+       
+       break;
+      
+       case kDefaultAuto:
+      default:
+      
+      break;
+    }
   }
 
   @Override
