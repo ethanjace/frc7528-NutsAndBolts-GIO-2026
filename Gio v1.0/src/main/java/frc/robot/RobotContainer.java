@@ -44,11 +44,11 @@ import frc.robot.generated.*;
 public class RobotContainer {
 
 
-    private double MaxSpeed = TunerConstantsGio.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond); // 3/4 of a rotation per second max angular velocity
+     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
   // SUBSYSTEMS   ---   ---   ---   ---   ---
   public static lemonlightuno limelight = new lemonlightuno();
-  private final CommandSwerveDrivetrain drivetrain = TunerConstantsGio.createDrivetrain();
+  public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
   private final Intake intake = new Intake();
   private final Outtake outtake = new Outtake();
 
@@ -61,7 +61,8 @@ public class RobotContainer {
   
   private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
-
+  
+  
     
     
 
@@ -102,12 +103,12 @@ public class RobotContainer {
   private void configureBindings() { 
    
 
-    driverController.leftBumper().whileTrue(drivetrain.applyRequest(() -> brake));
+    
     
     drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
-                drive.withVelocityX(-driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                drive.withVelocityX(driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
                     .withVelocityY(driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)  
                      .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Rotate clockwise with positive X (right)
             )

@@ -6,6 +6,8 @@ package frc.robot;
 
 import java.nio.channels.SelectableChannel;
 
+import com.ctre.phoenix6.hardware.Pigeon2;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -147,11 +149,12 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     
+       System.out.println(m_robotContainer.drivetrain.getState().Pose);
   //   if (xbox.getRightBumperButtonPressed()) {
       
   //     solenoid.toggle();
   //   }
-    
+  
   //   System.out.println(solenoid.get());
   }
 
