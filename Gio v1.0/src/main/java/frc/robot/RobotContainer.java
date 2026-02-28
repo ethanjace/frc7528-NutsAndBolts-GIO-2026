@@ -76,9 +76,6 @@ public class RobotContainer {
 
   // AUTO
   private final SendableChooser<String> autoChooser = new SendableChooser<>();
-   private static final String kDefaultAuto = "auto1"; // NEW AUTO
-  //   private static final String kCustomAuto = "auto1"; //ADDED
-  //   private String m_autoSelected; //ADDED
 
   
 
@@ -96,7 +93,7 @@ public class RobotContainer {
                 .withSize(2, 1);
     
     Shuffleboard.getTab("AUTO")
-                .add("on RED ALLIANCE: ", true)
+                .add("on RED ALLIANCE: ", false)
                 .withWidget(BuiltInWidgets.kBooleanBox)
                 .getEntry();
 // AUTO COMMANDS
@@ -158,8 +155,9 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   
-  public String getAutonomousCommand() {
+  public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return autoChooser.getSelected();
+    String selectedAuto = autoChooser.getSelected();
+    return drivetrain.getAutonomousCommand(selectedAuto);
   }
 }

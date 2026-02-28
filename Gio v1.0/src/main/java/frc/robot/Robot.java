@@ -34,6 +34,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
+  private Command autoSelected;
 
   // // PNEUMATICS [test]
   // private final XboxController xbox = new XboxController(0);
@@ -51,6 +52,7 @@ public class Robot extends TimedRobot {
     // and put our
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
+    
 
     // Used to track usage of Kitbot code, please do not remove.
     HAL.report(tResourceType.kResourceType_Framework, 10);
@@ -93,22 +95,12 @@ public class Robot extends TimedRobot {
    * {@link RobotContainer} class.
    */
    
-   //AUTONOMOUS
-   private static final String kDefaultAuto = "auto"; // NEW AUTO
-    private static final String kCustomAuto = "auto1";
-    private String m_autoSelected;
-    private final SendableChooser<String> m_chooser = new SendableChooser<>();
-   
-   public Robot() {
-    m_chooser.setDefaultOption("auto1", kDefaultAuto);
-    m_chooser.addOption("auto1", kCustomAuto);
-    SmartDashboard.putData("auto1",m_chooser);
-   }
+    
+  
   
    @Override
   public void autonomousInit() {
-    m_autoSelected = m_chooser.getSelected();
-    // Original line for line 108: m_autonomousCommand = m_robotContainer.getAutonomousCommand();
+    autoSelected = m_robotContainer.getAutonomousCommand();
     System.out.println("Auto selected: "+ "auto1");
 
     // schedule the autonomous command
@@ -119,16 +111,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during autonomous. */
   @Override
   public void autonomousPeriodic() {
-    switch(m_autoSelected){
-      case kCustomAuto:
-       
-       break;
-      
-       case kDefaultAuto:
-      default:
-      
-      break;
-    }
+
   }
 
   @Override
