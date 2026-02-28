@@ -9,7 +9,10 @@ import static edu.wpi.first.units.Units.*;
 
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.event.EventLoop;
+import edu.wpi.first.wpilibj.shuffleboard.BuiltInWidgets;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -21,7 +24,7 @@ import static frc.robot.Constants.OperatorConstants.*;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
-
+import com.pathplanner.lib.auto.NamedCommands;
 
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.ballsGo;
@@ -34,6 +37,7 @@ import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.lemonlight.lemonlightuno;
 import frc.robot.generated.*;
 
+
 /**
  * This class is where the bulk of the robot should be declared. Since
  * Command-based is a "declarative" paradigm, very little robot logic should
@@ -44,8 +48,9 @@ import frc.robot.generated.*;
 public class RobotContainer {
 
 
-     private double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
-    private double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+  public double MaxSpeed = 1.0 * TunerConstants.kSpeedAt12Volts.in(MetersPerSecond); // kSpeedAt12Volts desired top speed
+  public double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
+
   // SUBSYSTEMS   ---   ---   ---   ---   ---
   public static lemonlightuno limelight = new lemonlightuno();
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
@@ -69,11 +74,11 @@ public class RobotContainer {
   // OPERATOR    ---   ---   ---   ---   ---
   private final CommandXboxController operatorController = new CommandXboxController(1);
 
-  // The autonomous chooser
-  private final SendableChooser<Command> autoChooser = new SendableChooser<>();
-  private static final String kDefaultAuto = "auto1"; // NEW AUTO
-    private static final String kCustomAuto = "auto1"; //ADDED
-    private String m_autoSelected; //ADDED
+  // AUTO
+  private final SendableChooser<String> autoChooser = new SendableChooser<>();
+   private static final String kDefaultAuto = "auto1"; // NEW AUTO
+  //   private static final String kCustomAuto = "auto1"; //ADDED
+  //   private String m_autoSelected; //ADDED
 
   
 
@@ -83,10 +88,28 @@ public class RobotContainer {
   public RobotContainer() {
     configureBindings();
 
-    // Set the options to show up in the Dashboard for selecting auto modes. If you
-    // add additional auto modes you can add additional lines here with
-    // autoChooser.addOption
-    // autoChooser.setDefaultOption("Autonomous", new ExampleAuto(driveSubsystem, fuelSubsystem));
+    // AUTO
+    Shuffleboard.getTab("AUTO")
+                .add("SELECTION: ", autoChooser)
+                .withWidget(BuiltInWidgets.kComboBoxChooser)
+                .withPosition(0, 0)
+                .withSize(2, 1);
+    
+    Shuffleboard.getTab("AUTO")
+                .add("on RED ALLIANCE: ", true)
+                .withWidget(BuiltInWidgets.kBooleanBox)
+                .getEntry();
+// AUTO COMMANDS
+    NamedCommands.registerCommand("Auto1", new IntakeGo(intake));
+    // ADD AUTO OPTIONS
+    autoChooser.setDefaultOption("TestAuto", "TestAuto");
+    autoChooser.addOption("Auto1", "Auto1");
+    autoChooser.addOption("Auto2", "Auto2");
+
+    SmartDashboard.putData("So many choices: ", autoChooser);
+
+    
+
   }
 
   /**
@@ -101,15 +124,13 @@ public class RobotContainer {
    * joysticks}.
    */
   private void configureBindings() { 
-   
 
-    
-    
+    // DRIVE
     drivetrain.setDefaultCommand(
             // Drivetrain will execute this command periodically
             drivetrain.applyRequest(() ->
                 drive.withVelocityX(driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
-                    .withVelocityY(driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)  
+                     .withVelocityY(driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)  
                      .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Rotate clockwise with positive X (right)
             )
         );
@@ -137,7 +158,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   
-  public Command getAutonomousCommand() {
+  public String getAutonomousCommand() {
     // An example command will be run in autonomous
     return autoChooser.getSelected();
   }
