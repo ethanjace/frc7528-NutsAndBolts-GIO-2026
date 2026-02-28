@@ -5,15 +5,12 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Outtake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class ballsGo extends Command {
-  
-  private Outtake outtake = new Outtake();
-  public ballsGo(Outtake outtake) {
-    this.outtake = outtake;
-    addRequirements(this.outtake);
+public class OuttakeActivate extends Command {
+  /** Creates a new OuttakeActivate. */
+  public OuttakeActivate() {
+    // Use addRequirements() here to declare subsystem dependencies.
   }
 
   // Called when the command is initially scheduled.
@@ -22,15 +19,11 @@ public class ballsGo extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {
-    outtake.takeOutTheTrash(0.5);
-  }
+  public void execute() {}
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {
-    outtake.takeOutTheTrash(0);
-  }
+  public void end(boolean interrupted) {}
 
   // Returns true when the command should end.
   @Override

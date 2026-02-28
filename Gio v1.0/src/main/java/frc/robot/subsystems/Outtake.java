@@ -13,15 +13,24 @@ public class Outtake extends SubsystemBase {
 
   //DECLARE
   private TalonFX outtake = new TalonFX(OuttakeConstants.OUTTAKE_ID);
+  private TalonFX outtook = new TalonFX(OuttakeConstants.OUTTOOK_ID);
   public Outtake() {
     outtake.getConfigurator().apply(OuttakeConstants.configs);
+    outtook.getConfigurator().apply(OuttakeConstants.configs);
     outtake.getConfigurator().refresh(OuttakeConstants.currentLimits);
+    outtook.getConfigurator().refresh(OuttakeConstants.currentLimits);
     outtake.getConfigurator().apply(OuttakeConstants.currentLimits);
+    outtook.getConfigurator().apply(OuttakeConstants.currentLimits);
   }
 
   public void takeOutTheTrash(double speed) {
     outtake.set(speed);
   }
+
+  public void domainExpansionOUTTAKE(double speed) {
+    outtook.set(speed);
+  }
+
   @Override
   public void periodic() {
   }

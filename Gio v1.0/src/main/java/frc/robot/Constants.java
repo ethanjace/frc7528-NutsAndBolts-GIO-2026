@@ -74,6 +74,7 @@ public final class Constants {
 
   public static final class OuttakeConstants {
     public static final int OUTTAKE_ID = 16;
+    public static final int OUTTOOK_ID = 17;
     public static final TalonFXConfiguration configs = new TalonFXConfiguration();
     public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs()
     .withStatorCurrentLimit(60)

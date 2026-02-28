@@ -6,6 +6,8 @@ package frc.robot;
 
 import java.nio.channels.SelectableChannel;
 
+import org.littletonrobotics.junction.LoggedRobot;
+
 import com.ctre.phoenix6.hardware.Pigeon2;
 
 import edu.wpi.first.hal.HAL;
@@ -36,9 +38,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   private Command autoSelected;
 
-  // // PNEUMATICS [test]
-  // private final XboxController xbox = new XboxController(0);
-  // private final DoubleSolenoid solenoid = new DoubleSolenoid(14, PneumaticsModuleType.CTREPCM, 0, 1);
 
   /**
    * This function is run when the robot is first started up and should be used
