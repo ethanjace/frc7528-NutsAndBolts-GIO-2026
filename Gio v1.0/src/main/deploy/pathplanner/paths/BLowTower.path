@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.686433333333334,
-        "y": 3.167744444444444
+        "x": 2.277166666666667,
+        "y": 2.96311111111111
       },
       "isLocked": false,
       "linkedName": "BLowScorePos"
@@ -20,12 +20,12 @@
         "y": 3.3431444444444445
       },
       "prevControl": {
-        "x": 1.9750888888888891,
-        "y": 3.411355555555555
+        "x": 1.8670743378441235,
+        "y": 3.2596624703152215
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "LowTower"
     }
   ],
   "rotationTargets": [],
@@ -56,13 +56,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -90.6986943829835
   },
   "reversed": false,
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 30.228378507832495
+    "rotation": -150.228
   },
   "useDefaultConstraints": true
 }

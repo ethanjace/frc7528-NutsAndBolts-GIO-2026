@@ -1,0 +1,125 @@
+{
+  "version": "2025.0",
+  "waypoints": [
+    {
+      "anchor": {
+        "x": 3.4757333333333333,
+        "y": 7.406577777777777
+      },
+      "prevControl": null,
+      "nextControl": {
+        "x": 4.475733333333333,
+        "y": 7.406577777777777
+      },
+      "isLocked": false,
+      "linkedName": "BTopStartingPos"
+    },
+    {
+      "anchor": {
+        "x": 11.914422222222225,
+        "y": 7.406577777777777
+      },
+      "prevControl": {
+        "x": 10.914422222222225,
+        "y": 7.406577777777777
+      },
+      "nextControl": {
+        "x": 12.914422222222225,
+        "y": 7.406577777777777
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.588077777777777,
+        "y": 5.486922222222222
+      },
+      "prevControl": {
+        "x": 15.320989443975986,
+        "y": 7.110819291737113
+      },
+      "nextControl": {
+        "x": 15.831688888888888,
+        "y": 4.005766666666666
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.91938888888889,
+        "y": 2.758477777777778
+      },
+      "prevControl": {
+        "x": 15.70911325808919,
+        "y": 3.673176771756463
+      },
+      "nextControl": {
+        "x": 16.11427777777778,
+        "y": 1.910711111111111
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 15.91938888888889,
+        "y": 0.6244444444444435
+      },
+      "prevControl": {
+        "x": 16.27590370682043,
+        "y": 1.0019307222543063
+      },
+      "nextControl": {
+        "x": 15.747733005647959,
+        "y": 0.4426911563069897
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 2.705922222222222,
+        "y": 0.7706111111111102
+      },
+      "prevControl": {
+        "x": 8.114088888888887,
+        "y": 0.4100666666666657
+      },
+      "nextControl": null,
+      "isLocked": false,
+      "linkedName": null
+    }
+  ],
+  "rotationTargets": [],
+  "constraintZones": [],
+  "pointTowardsZones": [],
+  "eventMarkers": [
+    {
+      "name": "steal",
+      "waypointRelativePos": 3.1464019851116665,
+      "endWaypointRelativePos": 3.4540942928039704,
+      "command": null
+    }
+  ],
+  "globalConstraints": {
+    "maxVelocity": 3.0,
+    "maxAcceleration": 3.0,
+    "maxAngularVelocity": 540.0,
+    "maxAngularAcceleration": 720.0,
+    "nominalVoltage": 12.0,
+    "unlimited": false
+  },
+  "goalEndState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "reversed": false,
+  "folder": "BlueAlliance",
+  "idealStartingState": {
+    "velocity": 0,
+    "rotation": 180.0
+  },
+  "useDefaultConstraints": true
+}

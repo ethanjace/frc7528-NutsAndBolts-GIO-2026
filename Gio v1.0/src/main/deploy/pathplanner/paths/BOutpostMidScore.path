@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5147111111111116,
-        "y": 4.034999999999999
+        "x": 0.5621444444444443,
+        "y": 0.6439333333333332
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9926126712292773,
-        "y": 4.040428943154989
+        "x": 3.066466666666667,
+        "y": 0.8680555555555554
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "OutpostPos"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 1.8323042431427043,
-        "y": 4.031362420853389
+        "x": 3.3393111111111113,
+        "y": 3.499055555555555
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }

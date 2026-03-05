@@ -3,32 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5147111111111116,
-        "y": 4.034999999999999
+        "x": 3.4757333333333333,
+        "y": 7.406577777777777
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9926126712292773,
-        "y": 4.040428943154989
+        "x": 2.5200233905326908,
+        "y": 5.711250917523939
       },
-      "isLocked": false,
-      "linkedName": null
+      "isLocked": true,
+      "linkedName": "BTopStartingPos"
     },
     {
       "anchor": {
-        "x": 2.0822777777777777,
+        "x": 1.6242888888888891,
         "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 1.8323042431427043,
-        "y": 4.031362420853389
+        "x": 1.8050862397702385,
+        "y": 4.358108909120961
       },
       "nextControl": null,
-      "isLocked": false,
-      "linkedName": "BMidScorePos"
+      "isLocked": true,
+      "linkedName": "MidTower"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.27966804979252996,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0.48381742738588973,
+      "rotationDegrees": 180.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,7 +51,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -91.04162667601001
   },
   "reversed": false,
   "folder": "BlueAlliance",

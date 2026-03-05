@@ -1,0 +1,67 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BTopScorePosition"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Pewpew"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BTopScoreToDepot"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "pick up depot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 1.5
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BDepotTopScore"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Pewpew"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "BTopTower"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Level One"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}

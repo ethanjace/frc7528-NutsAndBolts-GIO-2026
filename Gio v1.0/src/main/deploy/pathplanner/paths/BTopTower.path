@@ -16,16 +16,16 @@
     },
     {
       "anchor": {
-        "x": 1.6535222222222226,
-        "y": 4.054488888888889
+        "x": 1.6242888888888891,
+        "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 2.0920222222222224,
-        "y": 4.239633333333333
+        "x": 2.062788888888889,
+        "y": 4.220144444444443
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "MidTower"
     }
   ],
   "rotationTargets": [],
@@ -42,13 +42,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -178.8766972859246
+    "rotation": -91.04162667601001
   },
   "reversed": false,
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -29.719165060108445
+    "rotation": 150.0
   },
   "useDefaultConstraints": true
 }

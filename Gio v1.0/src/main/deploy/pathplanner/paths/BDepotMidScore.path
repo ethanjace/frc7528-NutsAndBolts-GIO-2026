@@ -3,16 +3,16 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.5147111111111116,
-        "y": 4.034999999999999
+        "x": 0.5329111111111113,
+        "y": 4.9314888888888895
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.9926126712292773,
-        "y": 4.040428943154989
+        "x": 2.0627888888888886,
+        "y": 6.110566666666666
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "DepotEndPos"
     },
     {
       "anchor": {
@@ -20,8 +20,8 @@
         "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 1.8323042431427043,
-        "y": 4.031362420853389
+        "x": 2.472055555555556,
+        "y": 4.941233333333332
       },
       "nextControl": null,
       "isLocked": false,
@@ -48,7 +48,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

@@ -11,9 +11,15 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "Pewpew"
+          }
+        },
+        {
           "type": "path",
           "data": {
-            "pathName": "BTopTower"
+            "pathName": "BTopRunAwayRamp"
           }
         }
       ]

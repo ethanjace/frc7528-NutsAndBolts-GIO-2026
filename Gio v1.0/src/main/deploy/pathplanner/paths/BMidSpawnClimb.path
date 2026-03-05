@@ -16,19 +16,28 @@
     },
     {
       "anchor": {
-        "x": 2.0822777777777777,
+        "x": 1.6242888888888891,
         "y": 4.034999999999999
       },
       "prevControl": {
-        "x": 1.8323042431427043,
+        "x": 1.3743153542538158,
         "y": 4.031362420853389
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "BMidScorePos"
+      "linkedName": "MidTower"
     }
   ],
-  "rotationTargets": [],
+  "rotationTargets": [
+    {
+      "waypointRelativePos": 0.3095435684647319,
+      "rotationDegrees": 0.0
+    },
+    {
+      "waypointRelativePos": 0.5668049792531109,
+      "rotationDegrees": -90.0
+    }
+  ],
   "constraintZones": [],
   "pointTowardsZones": [],
   "eventMarkers": [],
@@ -42,13 +51,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": -91.04162667601001
   },
   "reversed": false,
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 180.0
+    "rotation": 0.0
   },
   "useDefaultConstraints": true
 }
