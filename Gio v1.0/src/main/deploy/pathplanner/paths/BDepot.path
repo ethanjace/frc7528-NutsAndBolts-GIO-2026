@@ -3,35 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0920222222222224,
-        "y": 2.4466555555555556
+        "x": 0.5329111111111113,
+        "y": 7.007055555555556
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.693788888888889,
-        "y": 3.0215777777777784
+        "x": 0.46470000000000006,
+        "y": 6.188522222222222
       },
       "isLocked": false,
-      "linkedName": "BLowScorePos"
+      "linkedName": "DepotReadyPos"
     },
     {
       "anchor": {
         "x": 0.5329111111111113,
-        "y": 7.007055555555556
+        "y": 4.9314888888888895
       },
       "prevControl": {
-        "x": 2.0822777777777786,
-        "y": 7.87431111111111
+        "x": 0.5036777777777779,
+        "y": 5.7013
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "DepotReadyPos"
+      "linkedName": "DepotEndPos"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -48,7 +55,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.0
+    "rotation": -90.0
   },
   "useDefaultConstraints": true
 }

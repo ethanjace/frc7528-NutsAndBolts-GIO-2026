@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0043222222222226,
-        "y": 2.5830777777777767
+        "x": 2.0920222222222224,
+        "y": 2.4466555555555556
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.277166666666667,
-        "y": 2.96311111111111
+        "x": 2.364866666666667,
+        "y": 2.826688888888889
       },
       "isLocked": false,
       "linkedName": "BLowScorePos"
@@ -62,7 +62,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.228
+    "rotation": -150.0
   },
   "useDefaultConstraints": true
 }

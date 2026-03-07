@@ -25,7 +25,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopRunAwayRamp"
+            "pathName": "BTopTower"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Level One"
           }
         }
       ]

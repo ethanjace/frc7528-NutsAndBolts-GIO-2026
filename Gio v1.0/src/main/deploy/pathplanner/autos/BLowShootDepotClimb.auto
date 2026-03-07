@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopScorePosition"
+            "pathName": "BLowScorePosition"
           }
         },
         {
@@ -25,7 +25,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopScoreToDepot"
+            "pathName": "BBottomScoreToDepot"
           }
         },
         {

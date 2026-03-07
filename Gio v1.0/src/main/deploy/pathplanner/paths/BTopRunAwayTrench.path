@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.1310000000000002,
-        "y": 5.204333333333333
+        "x": 1.8873888888888892,
+        "y": 5.097144444444443
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.3563273058202068,
-        "y": 5.312627401738796
+        "x": 2.1127161947090958,
+        "y": 5.2054385128499066
       },
       "isLocked": false,
       "linkedName": "BTopScorePos"
@@ -57,7 +57,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "BTopTrenchCenter"
     }
   ],
   "rotationTargets": [
@@ -103,7 +103,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 150.0
+    "rotation": 160.0
   },
   "useDefaultConstraints": true
 }

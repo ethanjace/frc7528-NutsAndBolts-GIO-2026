@@ -7,19 +7,25 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopScorePosition"
+            "pathName": "BLowScorePosition"
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "Pewpew"
+            "name": "AutoShoot"
+          }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.8
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BTopTower"
+            "pathName": "BLowTower"
           }
         },
         {

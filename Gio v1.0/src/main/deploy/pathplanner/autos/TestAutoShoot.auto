@@ -5,27 +5,21 @@
     "data": {
       "commands": [
         {
-          "type": "path",
-          "data": {
-            "pathName": "BTopScorePosition"
-          }
-        },
-        {
           "type": "named",
           "data": {
             "name": "AutoShoot"
           }
         },
         {
-          "type": "wait",
+          "type": "path",
           "data": {
-            "waitTime": 0.8
+            "pathName": "StraightLine"
           }
         },
         {
-          "type": "path",
+          "type": "named",
           "data": {
-            "pathName": "BTopRunAwayRamp"
+            "name": "AutoIntakeEngage"
           }
         }
       ]

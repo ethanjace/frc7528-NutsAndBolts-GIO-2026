@@ -8,8 +8,8 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.693788888888889,
-        "y": 3.0215777777777784
+        "x": 2.3746111111111112,
+        "y": 3.888833333333334
       },
       "isLocked": false,
       "linkedName": "BLowScorePos"
@@ -20,12 +20,12 @@
         "y": 7.007055555555556
       },
       "prevControl": {
-        "x": 2.0822777777777786,
-        "y": 7.87431111111111
+        "x": 1.507355555555556,
+        "y": 7.172711111111111
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "DepotReadyPos"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],

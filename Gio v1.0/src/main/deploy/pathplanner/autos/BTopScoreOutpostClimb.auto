@@ -25,43 +25,19 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopScoreToDepot"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoIntakeEngage"
+            "pathName": "BTopScoreToOutpost"
           }
         },
         {
           "type": "wait",
           "data": {
-            "waitTime": 0.8
+            "waitTime": 1.2
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "BDepot"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoIntake"
-          }
-        },
-        {
-          "type": "named",
-          "data": {
-            "name": "AutoIntakeDisengage"
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BDepotTopScore"
+            "pathName": "BOutpostLowScore"
           }
         },
         {
@@ -79,7 +55,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopTower"
+            "pathName": "BLowTower"
           }
         },
         {

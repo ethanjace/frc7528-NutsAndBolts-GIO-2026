@@ -8,23 +8,23 @@
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.5200233905326908,
-        "y": 5.711250917523939
+        "x": 2.876566877365283,
+        "y": 6.34372079463386
       },
       "isLocked": true,
       "linkedName": "BTopStartingPos"
     },
     {
       "anchor": {
-        "x": 2.1310000000000002,
-        "y": 5.204333333333333
+        "x": 1.8873888888888892,
+        "y": 5.097144444444443
       },
       "prevControl": {
-        "x": 2.3117973508813496,
-        "y": 5.527442242454295
+        "x": 2.2089555555555553,
+        "y": 5.5064111111111105
       },
       "nextControl": null,
-      "isLocked": true,
+      "isLocked": false,
       "linkedName": "BTopScorePos"
     }
   ],
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": 150.0
+    "rotation": 160.0
   },
   "reversed": false,
   "folder": "BlueAlliance",

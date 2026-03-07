@@ -3,35 +3,42 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0920222222222224,
-        "y": 2.4466555555555556
+        "x": 7.334533333333334,
+        "y": 1.5404222222222224
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.693788888888889,
-        "y": 3.0215777777777784
+        "x": 7.977666666666666,
+        "y": 1.754799999999999
       },
       "isLocked": false,
-      "linkedName": "BLowScorePos"
+      "linkedName": "BLowTrenchCenter"
     },
     {
       "anchor": {
-        "x": 0.5329111111111113,
-        "y": 7.007055555555556
+        "x": 6.993477777777779,
+        "y": 3.2846777777777767
       },
       "prevControl": {
-        "x": 2.0822777777777786,
-        "y": 7.87431111111111
+        "x": 7.909455555555555,
+        "y": 3.1287666666666665
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "DepotReadyPos"
+      "linkedName": "BLowAfterCenter"
     }
   ],
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "AutoIntake",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": 1.0,
+      "command": null
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 3.0,
     "maxAcceleration": 3.0,
@@ -42,13 +49,13 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": -160.21892289296486
   },
   "reversed": false,
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.0
+    "rotation": 60.3762512488262
   },
   "useDefaultConstraints": true
 }

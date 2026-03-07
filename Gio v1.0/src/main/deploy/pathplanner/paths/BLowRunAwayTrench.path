@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.0043222222222226,
-        "y": 2.5830777777777767
+        "x": 2.0920222222222224,
+        "y": 2.4466555555555556
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.0043222222222226,
-        "y": 2.5830777777777767
+        "x": 3.0920222222222224,
+        "y": 2.4466555555555556
       },
       "isLocked": false,
       "linkedName": "BLowScorePos"
@@ -57,7 +57,7 @@
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "BLowTrenchCenter"
     }
   ],
   "rotationTargets": [
@@ -103,7 +103,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.228
+    "rotation": -150.0
   },
   "useDefaultConstraints": true
 }

@@ -7,7 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": null
+            "pathName": "BTopSpawnClimb"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Level One"
           }
         }
       ]

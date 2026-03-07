@@ -7,7 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopScorePosition"
+            "pathName": "BMidScorePosition"
           }
         },
         {
@@ -25,7 +25,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "BTopRunAwayRamp"
+            "pathName": "BMidTower"
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "Level One"
           }
         }
       ]
