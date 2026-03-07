@@ -7,7 +7,6 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 // import frc.robot.subsystems.lemonlight.*;
-import frc.robot.subsystems.lemonlight.config.AutoScoreRight;
 
 public class lemonlightdos extends SubsystemBase {
 
@@ -30,10 +29,7 @@ public class lemonlightdos extends SubsystemBase {
    NetworkTable table;
    NetworkTableInstance Inst;
 
-   public final PIDController angleController = new PIDController(AutoScoreRight.AnglePID.P, AutoScoreRight.AnglePID.I,AutoScoreRight.AnglePID.D); // needs to be tuned
-   public final PIDController strafeController = new PIDController(AutoScoreRight.StrafePID.P,AutoScoreRight.StrafePID.I,AutoScoreRight.StrafePID.D);
-   public final PIDController distanceController = new PIDController(AutoScoreRight.DistancePID.P, AutoScoreRight.DistancePID.I,AutoScoreRight.DistancePID.D);
-
+   
    public lemonlightdos() {
       Inst = NetworkTableInstance.getDefault();
       table = Inst.getTable(LimelightIDs.Limelight.LeftTableName);
@@ -45,9 +41,6 @@ public class lemonlightdos extends SubsystemBase {
       prelimtAng = table.getEntry("botpose_targetspace");
       prelimtv = table.getEntry("tv");
 
-      angleController.setTolerance(AutoScoreRight.AngleTolerance);  // needs to be tuned
-      strafeController.setTolerance(AutoScoreRight.StrafeTolerance);
-      distanceController.setTolerance(AutoScoreRight.DistanceTolerance);
    }
 
    public void updateGameState(){

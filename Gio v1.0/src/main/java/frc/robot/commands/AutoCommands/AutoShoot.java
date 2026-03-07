@@ -5,12 +5,19 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.subsystems.Outtake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoShoot extends Command {
-  /** Creates a new AutoShoot. */
-  public AutoShoot() {
-    // Use addRequirements() here to declare subsystem dependencies.
+  private Outtake outtake;
+  private int target = 0; // # of cycles
+  private int count = 0;  // current # of cycles
+
+
+  public AutoShoot(Outtake outtake, double seconds) {
+    target = (int)(seconds * 50);   //50 cycles per second apparently
+    this.outtake  = outtake;
+    addRequirements(this.outtake);
   }
 
   // Called when the command is initially scheduled.
@@ -19,7 +26,12 @@ public class AutoShoot extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    if(count < target) {
+      outtake.takeOutTheTrash(0.5);
+      outtake.domainExpansionOUTTAKE(0.5);
+    }
+  }
 
   // Called once the command ends or is interrupted.
   @Override
