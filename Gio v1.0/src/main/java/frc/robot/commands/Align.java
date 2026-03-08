@@ -2,6 +2,8 @@ package frc.robot.commands;
 
 import static edu.wpi.first.units.Units.*;
 
+import javax.naming.NameNotFoundException;
+
 import org.w3c.dom.views.DocumentView;
 
 import com.ctre.phoenix6.swerve.SwerveRequest;
@@ -9,9 +11,13 @@ import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.RobotContainer;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.lemonlight.Lemonlightuno;
+import frc.robot.subsystems.lemonlight.Lemonlightuno.NoSuchTargetException;
+import frc.robot.subsystems.lemonlight.LimelightHelpers;
+import frc.robot.subsystems.lemonlight.lemonlightdos;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 import edu.wpi.first.math.controller.PIDController;
 class PIDControllerConfigurable extends PIDController {
@@ -38,28 +44,57 @@ public class Align extends Command {
   public double velocityX = 0;
   // private static final SwerveRequest.SwerveDriveBrake brake = new
   // SwerveRequest.SwerveDriveBrake();
+public boolean redTeam; 
+public int goalTag;
+  
 
-  public Align(CommandSwerveDrivetrain drivetrain, Lemonlightuno limelight) {
+  public Align(CommandSwerveDrivetrain drivetrain, Lemonlightuno limelight, boolean redTeam) {
     this.m_drivetrain = drivetrain;
     this.m_Limelight = limelight;
     addRequirements(m_Limelight);
+    this.redTeam = redTeam;
+    if (this.redTeam) {
+        this.goalTag = 15;
+    } else {
+        this.goalTag = 31;
+    }
+    
   }
+
+
+public RawFiducial getFiducialWithId(int id, RawFiducial[] fiducials) throws NameNotFoundException {// Debug
+    // https://github.com/LSRobotics/2025Robot/blob/2e593b524d59a1dbb6f38d302ac03bd51ced3021/src/main/java/frc/robot/subsystems/VisionSubsystem.java#L104
+    StringBuilder availableIds = new StringBuilder();
+
+    for (RawFiducial fiducial : fiducials) {
+      if (availableIds.length() > 0) {
+        availableIds.append(", ");
+      } // Error reporting
+      availableIds.append(fiducial.id);
+
+      if (fiducial.id == id) {
+        return fiducial;
+      }
+    }
+    throw new NameNotFoundException("Cannot find: " + id + ". IN view:: " + availableIds.toString());
+  }
+
 
 
   @Override
   public void initialize() {
     
   }
-
+  
+  
   @Override
   public void execute() {
     
-    RawFiducial fiducial; 
-
-    
+    RawFiducial fiducial;
+    RawFiducial[] fiducials = LimelightHelpers.getRawFiducials("");
 
     try {
-      fiducial = m_Limelight.getFiducialWithId(this.tagID);
+      fiducial = this.getFiducialWithId(this.goalTag, fiducials);
 
       rotationalRate = rotationalPidController.calculate(2*fiducial.txnc, 0.0) * 0.75* 0.9;
       
@@ -79,7 +114,7 @@ public class Align extends Command {
       // MaxAngularRate)
       // .withVelocityX(xPidController.calculate(0.2 * MaxSpeed)));
       // drivetrain.setControl(brake);
-    } catch (Lemonlightuno.NoSuchTargetException nste) { 
+    } catch (NameNotFoundException nste) { 
       System.out.println("No apriltag found");
       if ((rotationalRate != 0) && (velocityX != 0)){
         m_drivetrain.setControl(
@@ -101,3 +136,4 @@ public class Align extends Command {
     
   }
 }
+
