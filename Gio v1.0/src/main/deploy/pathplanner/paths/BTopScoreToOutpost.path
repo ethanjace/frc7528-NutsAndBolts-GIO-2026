@@ -20,7 +20,7 @@
         "y": 0.6439333333333332
       },
       "prevControl": {
-        "x": 2.9397888888888883,
+        "x": 2.939788888888888,
         "y": 0.488022222222221
       },
       "nextControl": null,
@@ -53,7 +53,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": 160.0
+    "rotation": -22.0
   },
   "useDefaultConstraints": true
 }

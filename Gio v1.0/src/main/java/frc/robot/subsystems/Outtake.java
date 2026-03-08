@@ -23,10 +23,12 @@ public class Outtake extends SubsystemBase {
     outtook.getConfigurator().apply(OuttakeConstants.currentLimits);
   }
 
+  // first outtake motor 
   public void takeOutTheTrash(double speed) {
     outtake.set(speed);
   }
 
+  // second outtake motor
   public void domainExpansionOUTTAKE(double speed) {
     outtook.set(speed);
   }

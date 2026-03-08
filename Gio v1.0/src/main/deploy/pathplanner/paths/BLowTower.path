@@ -62,7 +62,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -150.0
+    "rotation": 32.0
   },
   "useDefaultConstraints": true
 }

@@ -30,6 +30,7 @@ public class Intake extends SubsystemBase {
   intakeS.set(speed);
   }
   
+  // sets the intake up and down
   public void RotateIntake(double speed) {
   intakeR.set(speed);
   }

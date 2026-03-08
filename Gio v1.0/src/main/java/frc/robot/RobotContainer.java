@@ -15,26 +15,31 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import edu.wpi.first.wpilibj2.command.RunCommand;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine.Direction;
 
 import static frc.robot.Constants.OperatorConstants.*;
 
+import java.security.cert.LDAPCertStoreParameters;
 
 import com.ctre.phoenix6.swerve.SwerveModule.DriveRequestType;
 import com.ctre.phoenix6.swerve.SwerveRequest;
 import com.pathplanner.lib.auto.NamedCommands;
 
 import frc.robot.commands.IntakeUp;
-import frc.robot.commands.ballsGo;
+import frc.robot.commands.OuttakeActivate;
+import frc.robot.commands.AutoCommands.AutoIntake;
+import frc.robot.commands.AutoCommands.AutoIntakeDisengage;
+import frc.robot.commands.AutoCommands.AutoIntakeEngage;
+import frc.robot.commands.AutoCommands.AutoShoot;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
-//import frc.robot.commands.ExampleAuto;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.lemonlight.lemonlightuno;
+import frc.robot.subsystems.lemonlight.Lemonlightuno;
 import frc.robot.generated.*;
 
 
@@ -52,26 +57,26 @@ public class RobotContainer {
   public double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
 
   // SUBSYSTEMS   ---   ---   ---   ---   ---
-  public static lemonlightuno limelight = new lemonlightuno();
+  public static Lemonlightuno limelight = new Lemonlightuno();
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
   private final Intake intake = new Intake();
   private final Outtake outtake = new Outtake();
 
   // DRIVER   ---   ---   ---   ---   ---
-  private final CommandXboxController driverController = new CommandXboxController(0);
   private final Telemetry logger = new Telemetry(MaxSpeed);
   private final SwerveRequest.FieldCentric drive = new SwerveRequest.FieldCentric()
             .withDeadband(MaxSpeed * 0.1).withRotationalDeadband(MaxAngularRate * 0.1) // Add a 10% deadband
             .withDriveRequestType(DriveRequestType.OpenLoopVoltage); // Use open-loop control for drive motors
+  private final SwerveRequest.RobotCentric rDrive = new SwerveRequest.RobotCentric();
   
   private final SwerveRequest.SwerveDriveBrake brake = new SwerveRequest.SwerveDriveBrake();
   private final SwerveRequest.PointWheelsAt point = new SwerveRequest.PointWheelsAt();
   
-  
-    
+
     
 
-  // OPERATOR    ---   ---   ---   ---   ---
+  // CONTROLLERS    ---   ---   ---   ---   ---
+  private final CommandXboxController driverController = new CommandXboxController(0);
   private final CommandXboxController operatorController = new CommandXboxController(1);
 
   // AUTO
@@ -96,12 +101,18 @@ public class RobotContainer {
                 .add("on RED ALLIANCE: ", false)
                 .withWidget(BuiltInWidgets.kBooleanBox)
                 .getEntry();
-// AUTO COMMANDS
-    NamedCommands.registerCommand("Auto1", new IntakeGo(intake));
-    // ADD AUTO OPTIONS
+
+    // AUTO COMMANDS
+    NamedCommands.registerCommand("AutoIntake", new AutoIntake(intake, 2));
+    NamedCommands.registerCommand("AutoShoot", new AutoShoot(outtake, 1));
+    NamedCommands.registerCommand("AutoIntakeEngage", new AutoIntakeEngage(intake, 1));
+    NamedCommands.registerCommand("AutoIntakeDisengage", new AutoIntakeDisengage(intake, 1));
+    
+    // AUTO SELECTOR (In Shuffleboard)
     autoChooser.setDefaultOption("TestAuto", "TestAuto");
-    autoChooser.addOption("Auto1", "Auto1");
+    autoChooser.addOption("TestAutoShoot", "TestAutoShoot");
     autoChooser.addOption("Auto2", "Auto2");
+    //add rest of auto options after testing!!
 
     SmartDashboard.putData("So many choices: ", autoChooser);
 
@@ -132,22 +143,28 @@ public class RobotContainer {
             )
         );
     
+    // CONTROLS
+    
     // INTAKE MECHANISM
-    driverController.x().whileTrue(new IntakeGo(intake));
-    driverController.a().whileTrue(new IntakeUp(intake));
-    driverController.b().whileTrue(new IntakeDown(intake));
+    driverController.leftTrigger().whileTrue(new IntakeGo(intake));   // Runs Intake [ LT ]
+    driverController.a().whileTrue(new IntakeUp(intake));   // Disengages Intake     [ A ]     // Maybe change these two to Auto command?
+    driverController.b().whileTrue(new IntakeDown(intake)); // Engages Intake        [ B ]     //
     
     // OUTTAKE MECHANISM
-    driverController.y().whileTrue(new ballsGo(outtake));
+    driverController.rightTrigger().whileTrue(new OuttakeActivate(outtake)); // Runs Outtake  [ RT ]
 
-    // Set the default command for the drive subsystem to the command provided by
-    // factory with the values provided by the joystick axes on the driver
-    // controller. The Y axis of the controller is inverted so that pushing the
-    // stick away from you (a negative value) drives the robot forwards (a positive
-    // value)
+    // CLIMB MECHANISM    [ LB ] / [ RB ]
+    
 
-    // fuelSubsystem.setDefaultCommand(fuelSubsystem.run(() -> fuelSubsystem.stop()));
-  }
+    // LIMELIGHT (probably doesn't work)
+    driverController.leftBumper()
+    .whileTrue(
+          drivetrain.applyRequest(() ->
+          rDrive.withVelocityX(limelight.getY() * -0.1)
+                .withVelocityY(limelight.getX() * -0.05)));
+    }
+    
+  
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -161,3 +178,4 @@ public class RobotContainer {
     return drivetrain.getAutonomousCommand(selectedAuto);
   }
 }
+ 

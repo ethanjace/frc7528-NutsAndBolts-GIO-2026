@@ -33,7 +33,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
  */
 
 public class Robot extends TimedRobot {
-  private Command m_autonomousCommand;
+  
 
   private RobotContainer m_robotContainer;
   private Command autoSelected;
@@ -78,6 +78,9 @@ public class Robot extends TimedRobot {
     // robot's periodic
     // block in order for anything in the Command-based framework to work.
     CommandScheduler.getInstance().run();
+
+
+
   }
 
   /** This function is called once each time the robot enters Disabled mode. */
@@ -100,11 +103,11 @@ public class Robot extends TimedRobot {
    @Override
   public void autonomousInit() {
     autoSelected = m_robotContainer.getAutonomousCommand();
-    System.out.println("Auto selected: "+ "auto1");
+    System.out.println("Auto selected: "+ autoSelected);
 
     // schedule the autonomous command
-    if (m_autonomousCommand != null)
-      CommandScheduler.getInstance().schedule(m_autonomousCommand);
+    if (autoSelected != null)
+      CommandScheduler.getInstance().schedule(autoSelected);
   }
 
   /** This function is called periodically during autonomous. */
@@ -119,8 +122,10 @@ public class Robot extends TimedRobot {
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
     // this line or comment it out.
-    if (m_autonomousCommand != null) {
-      m_autonomousCommand.cancel();
+
+    // Stops the auto
+    if (autoSelected != null) {
+      autoSelected.cancel();
     }
     
     // solenoid.set(DoubleSolenoid.Value.kReverse);
