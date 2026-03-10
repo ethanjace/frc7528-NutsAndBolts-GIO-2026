@@ -15,11 +15,11 @@ import frc.robot.RobotContainer;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
 import frc.robot.subsystems.lemonlight.Lemonlightuno;
-import frc.robot.subsystems.lemonlight.Lemonlightuno.NoSuchTargetException;
 import frc.robot.subsystems.lemonlight.LimelightHelpers;
 import frc.robot.subsystems.lemonlight.lemonlightdos;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 import edu.wpi.first.math.controller.PIDController;
+
 class PIDControllerConfigurable extends PIDController {
   public PIDControllerConfigurable(double kP, double kI, double kD) {
       super(kP, kI, kD);
@@ -54,9 +54,9 @@ public int goalTag;
     addRequirements(m_Limelight);
     this.redTeam = redTeam;
     if (this.redTeam) {
-        this.goalTag = 15;
+        this.goalTag = 9;
     } else {
-        this.goalTag = 31;
+        this.goalTag = 25;
     }
     
   }

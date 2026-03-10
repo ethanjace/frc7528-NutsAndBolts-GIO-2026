@@ -6,7 +6,6 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.lemonlight.Lemonlightuno.NoSuchTargetException;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 
@@ -63,12 +62,6 @@ public class Lemonlightuno extends SubsystemBase {
       tv = (int) prelimtv.getInteger(tv);
       tAng = prelimtAng.getDoubleArray(new double[6]);
    }
-
-   public static class NoSuchTargetException extends RuntimeException {
-    public NoSuchTargetException(String message) {
-      super(message);
-    }
-  }
 
    public double getArea(){
       ta = prelimta.getDouble(ta);
@@ -132,31 +125,6 @@ public class Lemonlightuno extends SubsystemBase {
       SmartDashboard.putBoolean("Right tv", ifValidTag());
 	}
 
-  public RawFiducial getClosestFiducial() {
-    if (fiducials == null || fiducials.length == 0) {
-        throw new NoSuchTargetException("No fiducials found.");
-    }
 
-    RawFiducial closest = fiducials[0];
-    double minDistance = closest.ta;
-
-    for (RawFiducial fiducial : fiducials) {
-        if (fiducial.ta > minDistance) {
-            closest = fiducial;
-            minDistance = fiducial.ta;
-        }
-    }
-    return closest;
-   }
-
-public RawFiducial getFiducialWithId(int id) {
-  
-    for (RawFiducial fiducial : fiducials) {
-        if (fiducial.id == id) {
-            return fiducial;
-        }
-    }
-    throw new NoSuchTargetException("Can't find ID: " + id);
-  }
 
 }

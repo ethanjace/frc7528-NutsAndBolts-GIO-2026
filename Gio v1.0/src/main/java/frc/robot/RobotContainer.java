@@ -34,6 +34,7 @@ import frc.robot.commands.AutoCommands.AutoIntake;
 import frc.robot.commands.AutoCommands.AutoIntakeDisengage;
 import frc.robot.commands.AutoCommands.AutoIntakeEngage;
 import frc.robot.commands.AutoCommands.AutoShoot;
+import frc.robot.commands.Align;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
 import frc.robot.subsystems.Intake;
@@ -156,12 +157,13 @@ public class RobotContainer {
     // CLIMB MECHANISM    [ LB ] / [ RB ]
     
 
-    // LIMELIGHT (probably doesn't work)
-    driverController.leftBumper()
+    // LIMELIGHT (probably doesn't work)   
+    driverController.x()           // Aligns to hub left side    [ X ]
     .whileTrue(
-          drivetrain.applyRequest(() ->
-          rDrive.withVelocityX(limelight.getY() * -0.1)
-                .withVelocityY(limelight.getX() * -0.05)));
+      new Align(drivetrain, limelight, true));
+          // drivetrain.applyRequest(() ->
+          // rDrive.withVelocityX(limelight.getY() * -0.1)
+          //       .withVelocityY(limelight.getX() * -0.05)));
     }
     
   
