@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 3.4757333333333333,
-        "y": 7.406577777777777
+        "x": 13.81458888888889,
+        "y": 2.4563999999999986
       },
       "prevControl": null,
       "nextControl": {
-        "x": 4.475733333333333,
-        "y": 7.406577777777777
+        "x": 14.81458888888889,
+        "y": 2.4563999999999986
       },
       "isLocked": false,
       "linkedName": "BTopStartingPos"
@@ -293,7 +293,7 @@
       },
       "prevControl": {
         "x": 16.260444444441244,
-        "y": 3.6257333333375668
+        "y": 3.6257333333375663
       },
       "nextControl": {
         "x": 16.12508520337201,
@@ -437,7 +437,7 @@
       },
       "prevControl": {
         "x": 11.914231419165947,
-        "y": 0.29526464305252653
+        "y": 0.2952646430525266
       },
       "nextControl": {
         "x": 8.250701914167387,
@@ -704,7 +704,7 @@
   "folder": "BlueAlliance",
   "idealStartingState": {
     "velocity": 0,
-    "rotation": -90.0
+    "rotation": 143.0272375104319
   },
   "useDefaultConstraints": true
 }

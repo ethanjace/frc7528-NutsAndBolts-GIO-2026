@@ -6,11 +6,11 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.subsystems.lemonlight.Lemonlightuno.NoSuchTargetException;
+import frc.robot.subsystems.lemonlight.lemonlightuno.NoSuchTargetException;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
 
-public class Lemonlightuno extends SubsystemBase {
+public class lemonlightuno extends SubsystemBase {
 
    private double ta;
    private double tx;
@@ -33,7 +33,7 @@ public class Lemonlightuno extends SubsystemBase {
    NetworkTableInstance Inst;
 
    
-   public Lemonlightuno() {
+   public lemonlightuno() {
       Inst = NetworkTableInstance.getDefault();
       table = Inst.getTable(LimelightIDs.Limelight.RightTableName);
       prelimta = table.getEntry("ta");

@@ -34,13 +34,16 @@ import frc.robot.commands.AutoCommands.AutoIntake;
 import frc.robot.commands.AutoCommands.AutoIntakeDisengage;
 import frc.robot.commands.AutoCommands.AutoIntakeEngage;
 import frc.robot.commands.AutoCommands.AutoShoot;
+import frc.robot.commands.AutoCommands.StopShoot;
+import frc.robot.commands.Align;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
 import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Outtake;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.lemonlight.Lemonlightuno;
+import frc.robot.subsystems.lemonlight.lemonlightuno;
 import frc.robot.generated.*;
+import frc.robot.commands.AutoCommands.TurnAround;
 
 
 /**
@@ -57,7 +60,7 @@ public class RobotContainer {
   public double MaxAngularRate = RotationsPerSecond.of(0.75).in(RadiansPerSecond);
 
   // SUBSYSTEMS   ---   ---   ---   ---   ---
-  public static Lemonlightuno limelight = new Lemonlightuno();
+  public static lemonlightuno limelight = new lemonlightuno();
   public final CommandSwerveDrivetrain drivetrain = TunerConstants.createDrivetrain();
   private final Intake intake = new Intake();
   private final Outtake outtake = new Outtake();
@@ -104,15 +107,24 @@ public class RobotContainer {
 
     // AUTO COMMANDS
     NamedCommands.registerCommand("AutoIntake", new AutoIntake(intake, 2));
-    NamedCommands.registerCommand("AutoShoot", new AutoShoot(outtake, 1));
+    NamedCommands.registerCommand("AutoShoot", new AutoShoot(outtake, 2).withTimeout(2));
     NamedCommands.registerCommand("AutoIntakeEngage", new AutoIntakeEngage(intake, 1));
     NamedCommands.registerCommand("AutoIntakeDisengage", new AutoIntakeDisengage(intake, 1));
+    NamedCommands.registerCommand("StopShoot", new StopShoot(outtake, 1));
     
     // AUTO SELECTOR (In Shuffleboard)
-    autoChooser.setDefaultOption("TestAuto", "TestAuto");
+    autoChooser.setDefaultOption("TestAuto", "TestAuto");   
     autoChooser.addOption("TestAutoShoot", "TestAutoShoot");
-    autoChooser.addOption("Auto2", "Auto2");
+    autoChooser.addOption("SIMPLEAUTO", "SIMPLEAUTO");      // DRIVES BACK AND SCORES MID [blue]
+    autoChooser.addOption("SCORE", "SCORE");                // JUST STARTS SHOOTING
+    autoChooser.addOption("TOPSCORE", "TOPSCORE");          // TURNS AND SCORES TOP [blue]
+    autoChooser.addOption("BOTTOMSCORE", "BOTTOMSCORE");    // TURNS AND SCORES BOTTOM [blue]
+    autoChooser.addOption("RED2", "RED2");                  // DRIVES BACK AND SCORES [red]
+    autoChooser.addOption("interruptor", "interruptor");    // whatever [red 1]
+    autoChooser.addOption("BLowScoreRamp", "BLowScoreRamp");
+
     //add rest of auto options after testing!!
+
 
     SmartDashboard.putData("So many choices: ", autoChooser);
 
@@ -142,13 +154,17 @@ public class RobotContainer {
                      .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Rotate clockwise with positive X (right)
             )
         );
+     driverController.rightStick().onTrue(new TurnAround(drivetrain, 1).withTimeout(0.6));    // 180 degree turn around  [ RS ]
+     drivetrain.registerTelemetry(logger::telemeterize);
+     driverController.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));  // REALIGN [ X ]
     
     // CONTROLS
     
     // INTAKE MECHANISM
-    driverController.leftTrigger().whileTrue(new IntakeGo(intake));   // Runs Intake [ LT ]
-    driverController.a().whileTrue(new IntakeUp(intake));   // Disengages Intake     [ A ]     // Maybe change these two to Auto command?
-    driverController.b().whileTrue(new IntakeDown(intake)); // Engages Intake        [ B ]     //
+    driverController.leftTrigger().whileTrue(new IntakeGo(outtake));   // Runs Intake [ LT ]
+    // driverController.a().whileTrue(new IntakeUp(intake));   // Disengages Intake     [ A ]     // Maybe change these two to Auto command?
+    // driverController.b().whileTrue(new IntakeDown(intake)); // Engages Intake        [ B ]     //
+    // changes in plan led to intake mechanism being removed and merged with outtake
     
     // OUTTAKE MECHANISM
     driverController.rightTrigger().whileTrue(new OuttakeActivate(outtake)); // Runs Outtake  [ RT ]
@@ -157,11 +173,9 @@ public class RobotContainer {
     
 
     // LIMELIGHT (probably doesn't work)
-    driverController.leftBumper()
+    driverController.y()
     .whileTrue(
-          drivetrain.applyRequest(() ->
-          rDrive.withVelocityX(limelight.getY() * -0.1)
-                .withVelocityY(limelight.getX() * -0.05)));
+          new Align(drivetrain, limelight, false));
     }
     
   

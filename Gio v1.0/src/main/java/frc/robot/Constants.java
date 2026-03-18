@@ -63,8 +63,8 @@ public final class Constants {
   }
 
   public static final class IntakeConstants {
-    public static final int INTAKE_ROTATE_MOTOR_ID = 19;
-    public static final int INTAKE_SPIN_MOTOR_ID = 18;
+    public static final int INTAKE_ROTATE_MOTOR_ID = 23;
+    public static final int INTAKE_SPIN_MOTOR_ID = 22;
     public static final TalonFXConfiguration configs = new TalonFXConfiguration();
     public static final CurrentLimitsConfigs currentLimits = new CurrentLimitsConfigs()
     .withStatorCurrentLimit(60)

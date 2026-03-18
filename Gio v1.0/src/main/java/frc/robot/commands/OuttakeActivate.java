@@ -25,8 +25,8 @@ public class OuttakeActivate extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    outtake.takeOutTheTrash(0.8);
-    outtake.domainExpansionOUTTAKE(0.65);
+    outtake.takeOutTheTrash(0.9);
+    outtake.domainExpansionOUTTAKE(-0.85);
   }
 
   // Called once the command ends or is interrupted.

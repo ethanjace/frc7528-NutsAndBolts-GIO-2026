@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 1.8873888888888892,
-        "y": 5.097144444444443
+        "x": 5.882611111111112,
+        "y": 2.4563999999999986
       },
       "prevControl": {
-        "x": 1.3319555555555556,
-        "y": 5.5648777777777765
+        "x": 5.327177777777779,
+        "y": 2.924133333333332
       },
       "nextControl": null,
       "isLocked": false,
@@ -42,7 +42,7 @@
   },
   "goalEndState": {
     "velocity": 0,
-    "rotation": -22.0
+    "rotation": 180.0
   },
   "reversed": false,
   "folder": "BlueAlliance",

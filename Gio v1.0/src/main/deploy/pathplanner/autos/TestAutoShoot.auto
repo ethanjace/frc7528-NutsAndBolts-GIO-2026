@@ -11,15 +11,21 @@
           }
         },
         {
-          "type": "path",
+          "type": "wait",
           "data": {
-            "pathName": "StraightLine"
+            "waitTime": 1.0
           }
         },
         {
           "type": "named",
           "data": {
-            "name": "AutoIntakeEngage"
+            "name": "StopShoot"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "StraightLine"
           }
         }
       ]

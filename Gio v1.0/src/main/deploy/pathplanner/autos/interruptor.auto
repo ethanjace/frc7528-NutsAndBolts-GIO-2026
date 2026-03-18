@@ -7,13 +7,7 @@
         {
           "type": "path",
           "data": {
-            "pathName": "StraightLine"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 1.0
+            "pathName": "R1ScorePosition"
           }
         },
         {
@@ -25,13 +19,19 @@
         {
           "type": "wait",
           "data": {
-            "waitTime": 1.0
+            "waitTime": 2.0
+          }
+        },
+        {
+          "type": "named",
+          "data": {
+            "name": "StopShoot"
           }
         },
         {
           "type": "path",
           "data": {
-            "pathName": "StraightLinePt2"
+            "pathName": "sayonara"
           }
         }
       ]

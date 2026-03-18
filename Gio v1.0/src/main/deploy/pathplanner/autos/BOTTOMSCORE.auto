@@ -7,25 +7,13 @@
         {
           "type": "path",
           "data": {
-            "pathName": "R1ScorePosition"
+            "pathName": "BOTTOMTURN"
           }
         },
         {
           "type": "named",
           "data": {
             "name": "AutoShoot"
-          }
-        },
-        {
-          "type": "wait",
-          "data": {
-            "waitTime": 0.8
-          }
-        },
-        {
-          "type": "path",
-          "data": {
-            "pathName": "BTopRunAwayRamp"
           }
         }
       ]

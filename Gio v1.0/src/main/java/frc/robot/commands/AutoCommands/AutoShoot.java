@@ -10,12 +10,10 @@ import frc.robot.subsystems.Outtake;
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoShoot extends Command {
   private Outtake outtake;
-  private int target = 0; // # of cycles
-  private int count = 0;  // current # of cycles
+
 
 
   public AutoShoot(Outtake outtake, double seconds) {
-    target = (int)(seconds * 50);   //50 cycles per second apparently
     this.outtake  = outtake;
     addRequirements(this.outtake);
   }
@@ -27,15 +25,17 @@ public class AutoShoot extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(count < target) {
-      outtake.takeOutTheTrash(0.5);
-      outtake.domainExpansionOUTTAKE(0.5);
-    }
+      outtake.takeOutTheTrash(0.9);
+      outtake.domainExpansionOUTTAKE(-0.85);
+    
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    outtake.takeOutTheTrash(0);
+    outtake.domainExpansionOUTTAKE(0);
+  }
 
   // Returns true when the command should end.
   @Override
@@ -43,3 +43,7 @@ public class AutoShoot extends Command {
     return false;
   }
 }
+
+
+
+// ETHAN GIVE ME COMPUTER AFTER

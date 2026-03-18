@@ -14,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.RobotContainer;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.CommandSwerveDrivetrain;
-import frc.robot.subsystems.lemonlight.Lemonlightuno;
-import frc.robot.subsystems.lemonlight.Lemonlightuno.NoSuchTargetException;
+import frc.robot.subsystems.lemonlight.lemonlightuno;
+import frc.robot.subsystems.lemonlight.lemonlightuno.NoSuchTargetException;
 import frc.robot.subsystems.lemonlight.LimelightHelpers;
 import frc.robot.subsystems.lemonlight.lemonlightdos;
 import frc.robot.subsystems.lemonlight.LimelightHelpers.RawFiducial;
@@ -32,7 +32,7 @@ class PIDControllerConfigurable extends PIDController {
 }
 public class Align extends Command {
   private final CommandSwerveDrivetrain m_drivetrain;
-  private final Lemonlightuno m_Limelight;
+  private final lemonlightuno m_Limelight;
 
   private static final PIDControllerConfigurable rotationalPidController = new PIDControllerConfigurable(0.05000, 0.000000, 0.001000, 0.01);
   private static final PIDControllerConfigurable xPidController = new PIDControllerConfigurable(0.400000, 0.000000, 0.000600, 0.01);
@@ -48,15 +48,15 @@ public boolean redTeam;
 public int goalTag;
   
 
-  public Align(CommandSwerveDrivetrain drivetrain, Lemonlightuno limelight, boolean redTeam) {
+  public Align(CommandSwerveDrivetrain drivetrain, lemonlightuno limelight, boolean redTeam) {
     this.m_drivetrain = drivetrain;
     this.m_Limelight = limelight;
     addRequirements(m_Limelight);
     this.redTeam = redTeam;
     if (this.redTeam) {
-        this.goalTag = 15;
+        this.goalTag = 9;
     } else {
-        this.goalTag = 31;
+        this.goalTag = 9;
     }
     
   }

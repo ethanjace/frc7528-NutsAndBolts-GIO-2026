@@ -2,18 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Outtake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class IntakeGo extends Command {
-  /** Creates a new OuttakeActivate. */
-  //DECLARE
+public class StopShoot extends Command {
   private Outtake outtake;
+  private int target = 0; // # of cycles
+  private int count = 0;  // current # of cycles
 
-  public IntakeGo(Outtake outtake) {
+
+  public StopShoot(Outtake outtake, double seconds) {
+    target = (int)(seconds * 50);   //50 cycles per second apparently
     this.outtake  = outtake;
     addRequirements(this.outtake);
   }
@@ -25,8 +27,11 @@ public class IntakeGo extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    outtake.takeOutTheTrash(0.8);
-    outtake.domainExpansionOUTTAKE(0.6);
+    if(count < target) {
+      outtake.takeOutTheTrash(0);
+      outtake.domainExpansionOUTTAKE(0);
+      count++;
+    }
   }
 
   // Called once the command ends or is interrupted.
@@ -42,3 +47,7 @@ public class IntakeGo extends Command {
     return false;
   }
 }
+
+
+
+// ETHAN GIVE ME COMPUTER AFTER
