@@ -5,19 +5,15 @@
 package frc.robot.commands.AutoCommands;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Intake;
+import frc.robot.subsystems.Outtake;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
 public class AutoIntake extends Command {
-  private Intake intake;
-  private int target = 0; // # of cycles
-  private int count = 0;  // current # of cycles
+  private Outtake outtake;
 
-
-  public AutoIntake(Intake intake, double seconds) {
-    target = (int)(seconds * 50);   //50 cycles per second apparently
-    this.intake  = intake;
-    addRequirements(this.intake);
+  public AutoIntake(Outtake outtake) {
+    this.outtake  = outtake;
+    addRequirements(this.outtake);
   }
 
   // Called when the command is initially scheduled.
@@ -27,14 +23,17 @@ public class AutoIntake extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    if(count < target) {
-      intake.TakeIn(0.5);
-    }
+
+    outtake.takeOutTheTrash(0.8);
+    outtake.domainExpansionOUTTAKE(0.6);
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    outtake.takeOutTheTrash(0);
+    outtake.domainExpansionOUTTAKE(0);
+  }
 
   // Returns true when the command should end.
   @Override

@@ -17,7 +17,7 @@ public class TurnAround extends Command {
   private static final SwerveRequest.RobotCentric alignRequest = new SwerveRequest.RobotCentric().withDriveRequestType(DriveRequestType.OpenLoopVoltage);
 
 
-  public TurnAround(CommandSwerveDrivetrain swerve, double seconds) {
+  public TurnAround(CommandSwerveDrivetrain swerve) {
     this.swerve  = swerve;
     addRequirements(this.swerve);
   }

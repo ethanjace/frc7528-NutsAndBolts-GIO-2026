@@ -31,10 +31,7 @@ import com.pathplanner.lib.auto.NamedCommands;
 import frc.robot.commands.IntakeUp;
 import frc.robot.commands.OuttakeActivate;
 import frc.robot.commands.AutoCommands.AutoIntake;
-import frc.robot.commands.AutoCommands.AutoIntakeDisengage;
-import frc.robot.commands.AutoCommands.AutoIntakeEngage;
 import frc.robot.commands.AutoCommands.AutoShoot;
-import frc.robot.commands.AutoCommands.StopShoot;
 import frc.robot.commands.Align;
 import frc.robot.commands.IntakeDown;
 import frc.robot.commands.IntakeGo;
@@ -106,25 +103,42 @@ public class RobotContainer {
                 .getEntry();
 
     // AUTO COMMANDS
-    NamedCommands.registerCommand("AutoIntake", new AutoIntake(intake, 2));
-    NamedCommands.registerCommand("AutoShoot", new AutoShoot(outtake, 2).withTimeout(2));
-    NamedCommands.registerCommand("AutoIntakeEngage", new AutoIntakeEngage(intake, 1));
-    NamedCommands.registerCommand("AutoIntakeDisengage", new AutoIntakeDisengage(intake, 1));
-    NamedCommands.registerCommand("StopShoot", new StopShoot(outtake, 1));
+    NamedCommands.registerCommand("AutoIntake", new AutoIntake(outtake).withTimeout(10));
+    NamedCommands.registerCommand("AutoShoot", new AutoShoot(outtake).withTimeout(2));
     
     // AUTO SELECTOR (In Shuffleboard)
-    autoChooser.setDefaultOption("TestAuto", "TestAuto");   
-    autoChooser.addOption("TestAutoShoot", "TestAutoShoot");
-    autoChooser.addOption("SIMPLEAUTO", "SIMPLEAUTO");      // DRIVES BACK AND SCORES MID [blue]
-    autoChooser.addOption("SCORE", "SCORE");                // JUST STARTS SHOOTING
-    autoChooser.addOption("TOPSCORE", "TOPSCORE");          // TURNS AND SCORES TOP [blue]
-    autoChooser.addOption("BOTTOMSCORE", "BOTTOMSCORE");    // TURNS AND SCORES BOTTOM [blue]
-    autoChooser.addOption("RED2", "RED2");                  // DRIVES BACK AND SCORES [red]
-    autoChooser.addOption("interruptor", "interruptor");    // whatever [red 1]
-    autoChooser.addOption("BLowScoreRamp", "BLowScoreRamp");
+    // no more test autos!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // autoChooser.setDefaultOption("TestAuto", "TestAuto");   
+    // autoChooser.addOption("TestAutoShoot", "TestAutoShoot");
+    // autoChooser.addOption("SIMPLEAUTO", "SIMPLEAUTO");      // DRIVES BACK AND SCORES MID [blue]
+    // autoChooser.addOption("SCORE", "SCORE");                // JUST STARTS SHOOTING
+    // autoChooser.addOption("TOPSCORE", "TOPSCORE");          // TURNS AND SCORES TOP [blue]
+    // autoChooser.addOption("BOTTOMSCORE", "BOTTOMSCORE");    // TURNS AND SCORES BOTTOM [blue]
+    // autoChooser.addOption("RED2", "RED2");                  // DRIVES BACK AND SCORES [red]
+    // autoChooser.addOption("Testing3", "Testing3");
+    // autoChooser.addOption("UltimatePathTutorial", "UltimatePathTutorial");  // ultimate totorial
+   
 
     //add rest of auto options after testing!!
-
+    //AUTOS 
+     
+    //METHODS                         `````````````````````````````````````````````````````````````````````
+     autoChooser.addOption("LowBlueMethod", "LowBlueMethod");
+     autoChooser.addOption("MidBlueMethod", "MidBlueMethod");
+     autoChooser.addOption("TopBlueMethod", "TopBlueMethod");
+    
+    //SCORING
+     autoChooser.addOption("LowBlueScore", "LowBlueScore");
+     autoChooser.addOption("MidBlueScore", "MidBlueScore");
+     autoChooser.addOption("TopBlueScore", "TopBlueScore");
+     
+     //RED ALLIANCE AUTOS (not neccessary for now)
+    //  autoChooser.addOption("LowRedMethod", "LowRedMethod");
+    //  autoChooser.addOption("MidRedMethod", "MidRedMethod");
+    //  autoChooser.addOption("TopRedMethod", "TopRedMethod");
+    //  autoChooser.addOption("LowRedScore", "LowRedScore");
+    //  autoChooser.addOption("MidRedScore", "MidRedScore");
+    //  autoChooser.addOption("TopRedScore", "TopRedScore");
 
     SmartDashboard.putData("So many choices: ", autoChooser);
 
@@ -154,7 +168,7 @@ public class RobotContainer {
                      .withRotationalRate(-driverController.getRightX() * MaxAngularRate) // Rotate clockwise with positive X (right)
             )
         );
-     driverController.rightStick().onTrue(new TurnAround(drivetrain, 1).withTimeout(0.6));    // 180 degree turn around  [ RS ]
+     driverController.rightStick().onTrue(new TurnAround(drivetrain).withTimeout(0.6));    // 180 degree turn around  [ RS ]
      drivetrain.registerTelemetry(logger::telemeterize);
      driverController.x().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));  // REALIGN [ X ]
     
@@ -175,7 +189,13 @@ public class RobotContainer {
     // LIMELIGHT (probably doesn't work)
     driverController.y()
     .whileTrue(
-          new Align(drivetrain, limelight, false));
+          //new Align(drivetrain, limelight, false));
+            drivetrain.applyRequest(() ->
+                drive.withVelocityX(driverController.getLeftY() * MaxSpeed) // Drive forward with negative Y (forward)
+                     .withVelocityY(driverController.getLeftX() * MaxSpeed) // Drive left with negative X (left)  
+                     .withRotationalRate(limelight.getX() * MaxAngularRate) // Rotate clockwise with positive X (right)
+            )
+        );
     }
     
   

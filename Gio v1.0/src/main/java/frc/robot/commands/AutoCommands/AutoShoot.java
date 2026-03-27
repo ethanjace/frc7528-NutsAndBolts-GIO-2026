@@ -13,7 +13,7 @@ public class AutoShoot extends Command {
 
 
 
-  public AutoShoot(Outtake outtake, double seconds) {
+  public AutoShoot(Outtake outtake) {
     this.outtake  = outtake;
     addRequirements(this.outtake);
   }

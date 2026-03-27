@@ -3,10 +3,15 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
+    "BlueAllianceIntake",
+    "BlueAllianceOuttake",
+    "RedAllianceIntake",
+    "RedAllianceOuttake"
+  ],
+  "autoFolders": [
     "BlueAlliance",
     "RedAlliance"
   ],
-  "autoFolders": [],
   "defaultMaxVel": 3.0,
   "defaultMaxAccel": 3.0,
   "defaultMaxAngVel": 540.0,
